@@ -11,6 +11,7 @@ jvec = numpy.array(data[:,1], numpy.int)
 matrix = scipy.sparse.coo_matrix( (data[:,2], (ivec, jvec)) )
 eigenvalues, eigenvectors = scipy.sparse.linalg.eigsh(matrix, numEigenvalues, which='LA')
 
+print 'eigenvalues: '
 print eigenvalues
 
 
