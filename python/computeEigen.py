@@ -4,7 +4,7 @@ import scipy.sparse.linalg
 import argparse
 import sys
 
-parser = argparse.ArgumentParser(description='Compute eignevalues and eigenvectors')
+parser = argparse.ArgumentParser(description='Compute eigenvalues and eigenvectors')
 parser.add_argument('--input', dest='input', default='', type=str,
                     help='Sparse matrix coordinate file in i, j, value format')
 parser.add_argument('--numEigen', dest='numEigen', default=1, type=int, 
