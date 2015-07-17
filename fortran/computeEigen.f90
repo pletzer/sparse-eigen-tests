@@ -1,5 +1,5 @@
 program computeEigen
-  use sparse matrix_mod
+  use sparse_matrix_mod
   implicit none
 
   ! blas/lapack
@@ -30,8 +30,8 @@ program computeEigen
   allocate(v(mat%nrows, ncv))
   allocate(workd(3*mat%nrows))
   allocate(workev(3*ncv))
-  allocate(workl(3*ncv*ncv + 6*ncv)
   lworkl = 3*ncv**2 + 6*ncv
+  allocate(workl(lworkl))
   
   ! compute the eigenvalues/vectors
   10 continue
