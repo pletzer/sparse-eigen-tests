@@ -3,5 +3,6 @@ project(sparse_tests)
 
 enable_language(Fortran)
 add_executable(test_read test_read.f90 sparse_matrix.f90)
+add_executable(computeEigen computeEigen.f90 sparse_matrix.f90)
 
 
