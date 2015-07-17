@@ -15,7 +15,7 @@ program computeEigen
   real*8, parameter :: tol = 0 ! use machine precision
   real*8, allocatable :: resid(:)
   integer, parameter :: ncv = 30 ! max number of basis vectors used by the Implicitely Restarted Arnoldi Process
-  real*8, allocatable :: v, workd, workev, workl
+  real*8, allocatable :: v(:,:), workd(:), workev(:), workl(:)
   integer :: iparam(11)
   integer :: ipntr(14)
   integer :: lworkl
@@ -43,8 +43,8 @@ program computeEigen
 !        | has been exceeded.                          |
 !        %---------------------------------------------%
 
-         call dnaupd(ido, bmat, n, which, num_eig, tol, resid, ncv, 
-     &                 v, mat%nrows, iparam, ipntr, workd, workl, lworkl, 
+         call dnaupd(ido, bmat, n, which, num_eig, tol, resid, ncv, & 
+     &                 v, mat%nrows, iparam, ipntr, workd, workl, lworkl, &
      &                 info )
 
          if (ido /= -1 .or. ido == 1) then
