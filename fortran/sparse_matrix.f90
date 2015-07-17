@@ -59,6 +59,17 @@ module sparse_matrix_mod
     deallocate(self%values)
   end subroutine sparse_del
 
+  subroutine sparse_print(self)
+    type(sparse_matrix_type), intent(inout) :: self
+    integer :: k
+    print *, 'Number of rows: ', self%nrows
+    print *, 'Number of columns: ', self%ncols
+    print *, 'Number of non zero values: ', self%nnz
+    do k = 1, self%nnz
+      print *, 'i = ', self%irows(k), ' j = ', self%jcols(k), ' value = ', self%values(k)
+    enddo
+  end subroutine sparse_print
+
   subroutine sparse_matmult(self, vec, res)
     type(sparse_matrix_type), intent(inout) :: self
     real*8, intent(in)                      :: vec(*)

@@ -4,7 +4,7 @@ program test
   type(sparse_matrix_type) :: mat
   
   call sparse_new_from_file(mat, '../data/10x10.dat')
-  
+  call sparse_print(mat)
   call sparse_del(mat)
 
 end program test
