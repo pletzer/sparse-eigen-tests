@@ -10,7 +10,7 @@ module sparse_matrix_mod
 
   contains
 
-  subroutine new_from_file(self, filename)
+  subroutine sparse_new_from_file(self, filename)
     type(sparse_matrix_type), intent(inout) :: self
     character*(*), intent(in)               :: filename
     integer :: i, j, k, iu
@@ -49,17 +49,17 @@ module sparse_matrix_mod
        print *, 'ERROR: need to increase buff_size!!!'
     endif
 
-  end subroutine new_from_file
+  end subroutine sparse_new_from_file
 
-  subroutine del(self)
+  subroutine sparse_del(self)
     type(sparse_matrix_type), intent(inout) :: self
 
     deallocate(self%irows)
     deallocate(self%jcols)
     deallocate(self%values)
-  end subroutine del
+  end subroutine sparse_del
 
-  subroutine matmult(self, vec, res)
+  subroutine sparse_matmult(self, vec, res)
     type(sparse_matrix_type), intent(inout) :: self
     real*8, intent(in)                      :: vec(*)
     real*8, intent(out)                     :: res(*)
@@ -76,6 +76,6 @@ module sparse_matrix_mod
       res(i) = res(i) + self%values(k) * vec(j)
     enddo
     
-  end subroutine matmult
+  end subroutine sparse_matmult
 
 end module sparse_matrix_mod
