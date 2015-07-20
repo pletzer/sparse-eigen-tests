@@ -265,7 +265,7 @@
 !           | workd(ipntr(2)).                     |
 !           %--------------------------------------%
 !
-            call av(nx, workd(ipntr(1)), workd(ipntr(2)))
+            call sparse_matmult(mat, workd(ipntr(1)), workd(ipntr(2)))
 !
 !           %-----------------------------------------%
 !           | L O O P   B A C K to call DSAUPD again. |
