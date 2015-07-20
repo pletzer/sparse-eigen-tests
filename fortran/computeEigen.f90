@@ -31,7 +31,7 @@
      &                 v(ldv,maxncv), workl(maxncv*(maxncv+8)), &
      &                 workd(3*maxn), d(maxncv,2), resid(maxn), &
      &                 ax(maxn)
-      logical          select(maxncv)
+      logical          slct(maxncv)
       integer          iparam(11), ipntr(11)
 !
 !     %---------------%
@@ -286,7 +286,7 @@
 !           
           rvec = .true.
 !
-          call dseupd (rvec, 'All', select, d, v, ldv, sigma, & 
+          call dseupd (rvec, 'All', slct, d, v, ldv, sigma, & 
      &         bmat, n, which, nev, tol, resid, ncv, v, ldv, &
      &         iparam, ipntr, workd, workl, lworkl, ierr)
 !
