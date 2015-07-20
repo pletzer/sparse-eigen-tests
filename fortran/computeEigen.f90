@@ -1,6 +1,15 @@
       program dssimp
 
+      use sparse_matrix_mod
+
       implicit none
+
+!     %------------------------------------------------------%
+!     | Sparse matrix                                        |
+!     |                                                      |
+!     %------------------------------------------------------%
+
+      type(sparse_matrix_type) :: mat
 
 
 !     %------------------------------------------------------%
@@ -157,16 +166,11 @@
       bmat  = 'I'
       which = 'LM'
 !
-      if ( n .gt. maxn ) then
-         print *, ' ERROR with _SSIMP: N is greater than MAXN '
-         go to 9000
-      else if ( nev .gt. maxnev ) then
-         print *, ' ERROR with _SSIMP: NEV is greater than MAXNEV '
-         go to 9000
-      else if ( ncv .gt. maxncv ) then
-         print *, ' ERROR with _SSIMP: NCV is greater than MAXNCV '
-         go to 9000
-      end if
+!     %-------------------------------------------------%
+!     | Read data                                       |
+!     %-------------------------------------------------%
+      call sparse_new_from_file(mat, '../data/10x10.dat')
+
 !
 !     %-----------------------------------------------------%
 !     |                                                     |
