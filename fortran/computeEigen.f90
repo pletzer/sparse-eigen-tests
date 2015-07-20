@@ -25,17 +25,17 @@
 !     | MAXNCV: Maximum NCV allowed.                         |
 !     %------------------------------------------------------%
 !
-      integer, parameter :: maxn=256, maxnev=10, maxncv=25, ldv=maxn
+      integer :: maxn, maxnev, maxncv, ldv
 !
 !     %--------------%
 !     | Local Arrays |
 !     %--------------%
 !
-      real*8 &
-     &                 v(ldv,maxncv), workl(maxncv*(maxncv+8)), &
-     &                 workd(3*maxn), d(maxncv,2), resid(maxn), &
-     &                 ax(maxn)
-      logical          slct(maxncv)
+      real*8, allocatable :: &
+     &                 v(:, :), workl(:), &
+     &                 workd(:), d(:, :), resid(:), &
+     &                 ax(:)
+      logical, allocatable :: slct(:)
       integer          iparam(11), ipntr(11)
 !
 !     %---------------%
@@ -100,13 +100,7 @@
       msaup2 = 0
       mseigt = 0
       mseupd = 0
-!     
-!     %-------------------------------------------------%
-!     | The following sets dimensions for this problem. |
-!     %-------------------------------------------------%
-!
-      nx = 10
-      n = nx*nx
+
 !
 !     %-----------------------------------------------%
 !     |                                               | 
@@ -136,6 +130,30 @@
 !
       nev   = 4
       ncv   = 20 
+!     
+!     %-------------------------------------------------%
+!     | The following sets dimensions for this problem. |
+!     %-------------------------------------------------%
+!
+      nx = 10
+      n = nx*nx
+      maxnev = nev
+      maxncv = ncv
+      maxn = n
+      ldv=maxn
+      
+!     %-------------------------------------------------%
+!     | Allocate data                                   |
+!     %-------------------------------------------------%
+
+      allocate(v(ldv,maxncv))
+      allocate(workl(maxncv*(maxncv+8)))
+      allocate(workd(3*maxn))
+      allocate(d(maxncv,2))
+      allocate(resid(maxn))
+      allocate(ax(maxn))
+      allocate(slct(maxncv))
+
       bmat  = 'I'
       which = 'LM'
 !
