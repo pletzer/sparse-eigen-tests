@@ -164,7 +164,7 @@
       allocate(slct(maxncv))
 
       bmat  = 'I'
-      which = 'LM'
+      which = 'LA'
 !
 !     %-------------------------------------------------%
 !     | Read data                                       |
@@ -403,6 +403,12 @@
           print *, ' The number of OP*x is ', iparam(9)
           print *, ' The convergence criterion is ', tol
           print *, ' '
+
+          print *, 'Eigenvalues: '
+          do j = 1, nev
+             print *, d(j, 1)
+          end do
+
 !
       end if
 !
