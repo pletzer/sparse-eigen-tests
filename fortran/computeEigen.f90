@@ -1,4 +1,8 @@
       program dssimp
+
+      implicit none
+
+
 !     %------------------------------------------------------%
 !     | Storage Declarations:                                |
 !     |                                                      |
