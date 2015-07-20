@@ -357,7 +357,7 @@
 !               | tolerance)                |
 !               %---------------------------%
 !
-                call av(nx, v(1,j), ax)
+                call sparse_matmult(mat, v(1,j), ax)
                 call daxpy(n, -d(j,1), v(1,j), 1, ax, 1)
                 d(j,2) = dnrm2(n, ax, 1)
                 d(j,2) = d(j,2) / abs(d(j,1))
@@ -412,75 +412,5 @@
 !
  9000 continue
 !
-      end
-! 
-! ------------------------------------------------------------------
-!     matrix vector subroutine
-!
-!     The matrix used is the 2 dimensional discrete Laplacian on unit
-!     square with zero Dirichlet boundary condition.
-!
-!     Computes w <--- OP*v, where OP is the nx*nx by nx*nx block 
-!     tridiagonal matrix
-!
-!                  | T -I          | 
-!                  |-I  T -I       |
-!             OP = |   -I  T       |
-!                  |        ...  -I|
-!                  |           -I T|
-!
-!     The subroutine TV is called to computed y<---T*x.
-!
-      subroutine av(nx, v, w)
-      integer           nx, j, lo, n2
-      real*8 v(nx*nx), w(nx*nx), h2
-      integer, parameter :: one = 1
-!
-      call tv(nx,v(1),w(1))
-      call daxpy(nx, -one, v(nx+1), 1, w(1), 1)
-!
-      do 10 j = 2, nx-1
-         lo = (j-1)*nx
-         call tv(nx, v(lo+1), w(lo+1))
-         call daxpy(nx, -one, v(lo-nx+1), 1, w(lo+1), 1)
-         call daxpy(nx, -one, v(lo+nx+1), 1, w(lo+1), 1)
-  10  continue 
-!
-      lo = (nx-1)*nx
-      call tv(nx, v(lo+1), w(lo+1))
-      call daxpy(nx, -one, v(lo-nx+1), 1, w(lo+1), 1)
-!
-!     Scale the vector w by (1/h^2), where h is the mesh size
-!
-      n2 = nx*nx
-      h2 = one / dble((nx+1)*(nx+1))
-      call dscal(n2, one/h2, w, 1)
-      return
-      end
-!
-!-------------------------------------------------------------------
-      subroutine tv(nx, x, y)
-!
-      integer           nx, j 
-      real*8 &
-     &                  x(nx), y(nx), dd, dl, du
-!
-      real*8, parameter :: one = 1, four = 4
-!
-!     Compute the matrix vector multiplication y<---T*x
-!     where T is a nx by nx tridiagonal matrix with DD on the 
-!     diagonal, DL on the subdiagonal, and DU on the superdiagonal.
-!     
-!
-      dd  = four 
-      dl  = -one 
-      du  = -one
-! 
-      y(1) =  dd*x(1) + du*x(2)
-      do 10 j = 2,nx-1
-         y(j) = dl*x(j-1) + dd*x(j) + du*x(j+1) 
- 10   continue 
-      y(nx) =  dl*x(nx-1) + dd*x(nx) 
-      return
       end
 
