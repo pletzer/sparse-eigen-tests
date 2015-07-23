@@ -1,0 +1,30 @@
+#single thread benchmarking run 10 times with foreach for average user time
+readdata <- read.table("/gpfs/home/hup128/Desktop/data2.txt")  #read text file
+readdata[1,1:3,1]                           #check- print frist line
+eachcolumnfirst <- readdata[,3]
+
+input_m <- matrix( eachcolumnfirst , ncol =10000 , nrow=10000)  #symmetric matrix examples
+
+
+#start the clock
+ptm <- proc.time()
+  #library(foreach)
+  #foreach(times=10)
+  alleigne <- eigen(input_m, symmetric=1,  only.values=1)
+#stop the clock
+proc.time() - ptm 
+
+#$values for 10 by 10
+#[1] 52.8444745 29.3344473 20.3823831 10.5014335  9.3638307  6.6788450  3.1654772  1.9213670
+#[9]  0.8897715  0.1989242
+
+
+#$values for 10k by 10k top 50
+#[1] 10.851950  5.128867  5.077344  5.051181  5.032567  5.024736  4.989960  4.973715 [9]  4.927232  4.919689  4.910870  4.902999  4.878662  4.875054  4.863420  4.859196
+#[17]  4.854690  4.834854  4.831035  4.826326  4.810779  4.802937  4.798977  4.796118
+#[25]  4.788679  4.783930  4.774974  4.771834  4.758918  4.756077  4.751536  4.744251
+#[33]  4.739570  4.730823  4.726836  4.717425  4.712690  4.709888  4.706308  4.696623
+#[41]  4.691383  4.687322  4.682702  4.680726  4.679032  4.669816  4.665301  4.661068
+#[49]  4.655692  4.651224
+
+
