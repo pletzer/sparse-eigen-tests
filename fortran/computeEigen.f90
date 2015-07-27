@@ -1,4 +1,4 @@
-      program dssimp
+program dssimp
 
       use sparse_matrix_mod
 
@@ -247,6 +247,7 @@
       iparam(1) = ishfts
 !                
       iparam(3) = maxitr
+      iparam(4) = 1 
 !                  
       iparam(7) = mode1
 !
