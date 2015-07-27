@@ -7,5 +7,5 @@
 module load openmpi/1.8.4
 cd $PBS_O_WORKDIR
 
-./computeEigen
+./computeEigen < data2.in 
 

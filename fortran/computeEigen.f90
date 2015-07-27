@@ -100,6 +100,8 @@
      &         mnaupd, mnaup2, mnaitr, mneigh, mnapps, mngets, mneupd,&
      &         mcaupd, mcaup2, mcaitr, mceigh, mcapps, mcgets, mceupd
 
+      character*32 :: filename
+
       ndigit = -3
       logfil = 6
       msgets = 0
@@ -109,6 +111,20 @@
       msaup2 = 0
       mseigt = 0
       mseupd = 0
+
+!     
+!
+!     %-------------------------------------------------%
+!     | Read data                                       |
+!     %-------------------------------------------------%
+
+      print *,'Enter file name containing sparse matrix entries '
+      read(5, '(a32)') filename
+      print *,'Reading matrix entries from file ', filename
+      call sparse_new_from_file(mat, filename)
+      print *,' num rows: ', mat%nrows, ' num columns: ', mat%ncols
+      print *,' num non-zeros values: ', mat%nnz
+      !call sparse_print(mat)
 
 !
 !     %-----------------------------------------------%
@@ -137,16 +153,9 @@
 !     |          NEV + 1 <= NCV <= MAXNCV             |
 !     %-----------------------------------------------%
 !
-      nev   = 50
-      ncv   = 200
+      nev   = 5
+      ncv   = 10 ! should be about 2*nev or larger 
 !     
-!
-!     %-------------------------------------------------%
-!     | Read data                                       |
-!     %-------------------------------------------------%
-
-      call sparse_new_from_file(mat, '../data/data2.txt')
-
 !     %-------------------------------------------------%
 !     | The following sets dimensions for this problem. |
 !     %-------------------------------------------------%

@@ -15,7 +15,7 @@ module sparse_matrix_mod
     character*(*), intent(in)               :: filename
     integer :: i, j, k, iu
     real*8 :: val
-    integer, parameter :: buff_size = 1000000
+    integer, parameter :: buff_size = 10000000
     integer, dimension(buff_size) :: ibuff, jbuff
     real*8, dimension(buff_size) :: buff
 
@@ -33,6 +33,7 @@ module sparse_matrix_mod
       endif 
     end do
     1 close(iu)
+    k = k - 1
 
     allocate(self%irows(k))
     allocate(self%jcols(k))
