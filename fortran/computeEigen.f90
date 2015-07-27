@@ -153,8 +153,11 @@
 !     |          NEV + 1 <= NCV <= MAXNCV             |
 !     %-----------------------------------------------%
 !
-      nev   = 5
-      ncv   = 10 ! should be about 2*nev or larger 
+      print *,'Enter number of eigenvalues '
+      read(5, '(i4)') nev
+      ncv   = 3*nev ! should be about 2*nev or larger 
+      print *,' num of eigenvalues: ', nev
+      print *,' length of Arnoldi factorization: ', ncv
 !     
 !     %-------------------------------------------------%
 !     | The following sets dimensions for this problem. |
